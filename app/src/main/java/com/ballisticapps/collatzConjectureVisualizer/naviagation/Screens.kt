@@ -31,4 +31,3 @@ sealed class CollatzScreens(
         icon = R.drawable.round_bar_chart_24
     )
 }
-
