@@ -1,32 +1,37 @@
 package com.ballisticapps.collatzConjectureVisualizer.naviagation
 
 import com.ballisticapps.CollatzConjectureVisualizer.R
+import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzCalculatorScreenDestination
+import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzHistoryScreenDestination
+import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzInfoScreenDestination
+import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzUnityScreenDestination
+import com.ramcosta.composedestinations.spec.DirectionDestinationSpec
 
-sealed class CollatzScreens(
-    val route: String,
+sealed class Screens(
+    val direction: DirectionDestinationSpec,
     val title: String? = null,
     val icon: Int? = null
 ) {
-    object CalculatorScreen : CollatzScreens(
-        route = "calculator_screen",
+    object CalculatorScreen : Screens(
+        direction = CollatzCalculatorScreenDestination,
         title = "Calculator",
         icon = R.drawable.round_home_24
     )
 
-    object UnityVisualizerScreen : CollatzScreens(
-        route = "unity_visualizer_screen",
+    object UnityVisualizerScreen : Screens(
+        direction = CollatzUnityScreenDestination,
         title = "Visualizer",
         icon = R.drawable.round_visibility_24
     )
 
-    object HistoryScreen : CollatzScreens(
-        route = "history_screen",
+    object HistoryScreen : Screens(
+        direction = CollatzHistoryScreenDestination,
         title = "History",
         icon = R.drawable.round_history_24
     )
 
-    object InfoScreen : CollatzScreens(
-        route = "chart_screen",
+    object InfoScreen : Screens(
+        direction = CollatzInfoScreenDestination,
         title = "Info",
         icon = R.drawable.round_bar_chart_24
     )
