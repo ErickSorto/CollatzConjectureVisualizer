@@ -12,25 +12,25 @@ sealed class Screens(
     val title: String? = null,
     val icon: Int? = null
 ) {
-    object CalculatorScreen : Screens(
+    data object CalculatorScreen : Screens(
         direction = CollatzCalculatorScreenDestination,
         title = "Calculator",
         icon = R.drawable.round_home_24
     )
 
-    object UnityVisualizerScreen : Screens(
+    data object UnityVisualizerScreen : Screens(
         direction = CollatzUnityScreenDestination,
         title = "Visualizer",
         icon = R.drawable.round_visibility_24
     )
 
-    object HistoryScreen : Screens(
+    data object HistoryScreen : Screens(
         direction = CollatzHistoryScreenDestination,
         title = "History",
         icon = R.drawable.round_history_24
     )
 
-    object InfoScreen : Screens(
+    data object InfoScreen : Screens(
         direction = CollatzInfoScreenDestination,
         title = "Info",
         icon = R.drawable.round_bar_chart_24

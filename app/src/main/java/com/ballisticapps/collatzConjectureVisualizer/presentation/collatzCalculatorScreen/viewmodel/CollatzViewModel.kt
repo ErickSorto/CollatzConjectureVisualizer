@@ -3,6 +3,7 @@ package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalcul
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ballisticapps.collatzConjectureVisualizer.data.CollatzCalculator
+import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.CollatzCalculatorEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,11 +21,21 @@ class CollatzViewModel @Inject constructor(
     private val _collatzViewModelState = MutableStateFlow(CollatzViewModelState())
     val collatzViewModelState: StateFlow<CollatzViewModelState> = _collatzViewModelState.asStateFlow()
 
-    fun computeCollatzSequence(numEntered: BigInteger) {
+    fun onEvent(event: CollatzCalculatorEvent) = viewModelScope.launch {
+        when(event){
+            is CollatzCalculatorEvent.CalculateCollatzNumber -> {
+                computeCollatzSequence(_collatzViewModelState.value.enteredNumber.toBigInteger())
+            }
+            is CollatzCalculatorEvent.EnteredNumber -> {
+                _collatzViewModelState.update { it.copy(enteredNumber = event.value) }
+            }
+        }
+    }
+    private fun computeCollatzSequence(numEntered: BigInteger) {
         viewModelScope.launch {
             collatzCalculator.createCollatzList(numEntered).collect { number ->
-                _collatzViewModelState.update { currentState ->
-                    currentState.copy(collatzSequenceList = currentState.collatzSequenceList + number)
+                _collatzViewModelState.update {
+                    it.copy(collatzSequenceList = it.collatzSequenceList + number)
                 }
             }
         }
@@ -33,4 +44,5 @@ class CollatzViewModel @Inject constructor(
 
 data class CollatzViewModelState(
     val collatzSequenceList: List<BigInteger> = mutableListOf(),
+    val enteredNumber: String = ""
 )

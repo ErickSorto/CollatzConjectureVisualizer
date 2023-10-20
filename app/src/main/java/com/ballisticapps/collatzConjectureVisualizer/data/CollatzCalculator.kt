@@ -3,6 +3,8 @@ import dagger.Module
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.math.BigInteger
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * An implementation for computing the Collatz sequence for a given number.
@@ -17,8 +19,8 @@ import java.math.BigInteger
  *
  * @sample createCollatzList Uses the provided BigInteger value to generate and return the Collatz sequence.
  */
-@Module
-class CollatzCalculator {
+@Singleton
+class CollatzCalculator @Inject constructor() {
     private val oneBigInt = BigInteger("1")
     private val threeBigInt = BigInteger("3")
 
