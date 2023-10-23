@@ -1,32 +1,36 @@
 package com.ballisticapps.collatzConjectureVisualizer.presentation.mainScreen
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import com.ballisticapps.collatzConjectureVisualizer.presentation.NavGraphs
 import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.CollatzCalculatorScreen
 import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.viewmodel.CollatzViewModel
+import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzCalculatorScreenDestination
 import com.ballisticapps.collatzConjectureVisualizer.presentation.mainScreen.components.BottomNavigation
-import com.ballisticapps.collatzConjectureVisualizer.ui.theme.CollatzConjectureVisualizerTheme
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.navigation.dependency
 
-@RootNavGraph(start = true)
-@Destination
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
-
     Scaffold(
         bottomBar = {
-           BottomNavigation(navController = navController)
+            BottomNavigation(navController = navController)
         }
     ) {
-        it
-        CollatzConjectureVisualizerTheme {
-            val collatzCalculatorViewModel: CollatzViewModel = hiltViewModel()
-            CollatzCalculatorScreen(collatzViewModel = collatzCalculatorViewModel)
-        }
+        DestinationsNavHost(
+            navController = navController,
+            navGraph = NavGraphs.root,
+            modifier = Modifier.padding(it),
+            dependenciesContainerBuilder = {
+                dependency(CollatzCalculatorScreenDestination) {
+                    hiltViewModel<CollatzViewModel>()
+                }
+            }
+        )
     }
 }

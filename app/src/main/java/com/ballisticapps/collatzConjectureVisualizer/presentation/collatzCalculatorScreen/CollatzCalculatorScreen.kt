@@ -25,17 +25,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ballisticapps.CollatzConjectureVisualizer.R
 import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.components.CollatzInputLayout
 import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.viewmodel.CollatzViewModel
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 
+@RootNavGraph(start = true)
 @Destination
 @Composable
 fun CollatzCalculatorScreen(
-    collatzViewModel: CollatzViewModel = hiltViewModel()
+    collatzViewModel: CollatzViewModel
 ) {
     val collatzBigIntegerSequenceList by
         collatzViewModel.collatzBigIntegerSequence.collectAsStateWithLifecycle()
@@ -104,7 +105,7 @@ fun CollatzCalculatorScreen(
         )
 
         LazyColumn(
-            contentPadding = PaddingValues(vertical = 16.dp),
+            contentPadding = PaddingValues(vertical = 8.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(start = 8.dp, end = 8.dp, bottom = 8.dp)
@@ -115,10 +116,17 @@ fun CollatzCalculatorScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp, horizontal = 4.dp)
+                        .padding(vertical = 5.dp, horizontal = 4.dp)
                 ) {
-                    Text(text = "$index: ", color = textColor)
-                    Text(text = "$number", color = textColor)
+                    Text(
+                        text = "$index: ",
+                        color = textColor,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(end = 4.dp)
+                    )
+                    Text(text = "$number",
+
+                        color = textColor, fontSize = 16.sp)
                 }
             }
         }

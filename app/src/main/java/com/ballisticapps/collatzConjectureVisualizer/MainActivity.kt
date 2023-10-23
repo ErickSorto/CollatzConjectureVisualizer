@@ -3,12 +3,7 @@ package com.ballisticapps.collatzConjectureVisualizer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.CollatzCalculatorScreen
-import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.viewmodel.CollatzViewModel
 import com.ballisticapps.collatzConjectureVisualizer.presentation.mainScreen.MainScreen
-import com.ballisticapps.collatzConjectureVisualizer.ui.theme.CollatzConjectureVisualizerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
