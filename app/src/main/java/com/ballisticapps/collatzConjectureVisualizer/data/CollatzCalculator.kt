@@ -1,7 +1,9 @@
 package com.ballisticapps.collatzConjectureVisualizer.data
-import dagger.Module
+
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import java.math.BigInteger
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -30,17 +32,18 @@ class CollatzCalculator @Inject constructor() {
      * @param numEntered The starting number for which the Collatz sequence is to be computed.
      * @return A flow emitting each number in the Collatz sequence starting from the provided number.
      */
-    fun createCollatzList(numEntered: BigInteger): Flow<BigInteger> = flow {
-        var currentNumber = numEntered
-        emit(currentNumber)
-
-        while (currentNumber.bitLength() > 1) {
-            currentNumber = if (currentNumber.testBit(0)) {
-                currentNumber.multiply(threeBigInt).add(oneBigInt)
-            } else {
-                currentNumber.shiftRight(1)
-            }
+    fun createCollatzList(numEntered: BigInteger): Flow<BigInteger> =
+        flow { // Use Default dispatcher for CPU-intensive tasks
+            var currentNumber = numEntered
             emit(currentNumber)
-        }
-    }
+
+            while (currentNumber.bitLength() > 1) {
+                currentNumber = if (currentNumber.testBit(0)) {
+                    currentNumber.multiply(threeBigInt).add(oneBigInt)
+                } else {
+                    currentNumber.shiftRight(1)
+                }
+                emit(currentNumber)
+            }
+        }.flowOn(Dispatchers.Main)
 }
