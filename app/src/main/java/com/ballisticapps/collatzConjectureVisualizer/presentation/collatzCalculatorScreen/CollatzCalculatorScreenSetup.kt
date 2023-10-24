@@ -1,6 +1,5 @@
 package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -20,13 +19,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ballisticapps.CollatzConjectureVisualizer.R
 import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.components.CollatzInputLayout
 import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.viewmodel.CollatzViewModel
 import com.ramcosta.composedestinations.annotation.Destination
@@ -35,7 +32,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 @RootNavGraph(start = true)
 @Destination
 @Composable
-fun CollatzCalculatorScreen(
+fun CollatzCalculatorScreenSetup(
     collatzViewModel: CollatzViewModel
 ) {
     val collatzBigIntegerSequenceList by
@@ -51,7 +48,6 @@ fun CollatzCalculatorScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(vertical = 16.dp)
-            .background(if (isSystemInDarkTheme()) colorResource(id = R.color.lighterBlack) else Color.White)
     ) {
         if (collatzBigIntegerSequenceList.isEmpty() && !titleOff.value) {
             Text(
@@ -124,9 +120,10 @@ fun CollatzCalculatorScreen(
                         fontSize = 16.sp,
                         modifier = Modifier.padding(end = 4.dp)
                     )
-                    Text(text = "$number",
-
-                        color = textColor, fontSize = 16.sp)
+                    Text(
+                        text = "$number",
+                        color = textColor, fontSize = 16.sp
+                    )
                 }
             }
         }

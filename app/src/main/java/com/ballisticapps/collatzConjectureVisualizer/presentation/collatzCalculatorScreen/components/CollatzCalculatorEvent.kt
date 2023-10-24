@@ -1,4 +1,4 @@
-package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen
+package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.components
 
 sealed class CollatzCalculatorEvent {
     data class EnteredNumber(val value: String) : CollatzCalculatorEvent()

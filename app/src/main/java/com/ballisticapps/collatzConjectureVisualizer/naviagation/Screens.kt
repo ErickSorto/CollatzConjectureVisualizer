@@ -1,7 +1,7 @@
 package com.ballisticapps.collatzConjectureVisualizer.naviagation
 
 import com.ballisticapps.CollatzConjectureVisualizer.R
-import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzCalculatorScreenDestination
+import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzCalculatorScreenSetupDestination
 import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzHistoryScreenDestination
 import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzInfoScreenDestination
 import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzUnityScreenDestination
@@ -13,7 +13,7 @@ sealed class Screens(
     val icon: Int? = null
 ) {
     data object CalculatorScreen : Screens(
-        direction = CollatzCalculatorScreenDestination,
+        direction = CollatzCalculatorScreenSetupDestination,
         title = "Calculator",
         icon = R.drawable.round_home_24
     )

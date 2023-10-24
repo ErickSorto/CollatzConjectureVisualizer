@@ -3,7 +3,7 @@ package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalcul
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ballisticapps.collatzConjectureVisualizer.data.CollatzCalculator
-import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.CollatzCalculatorEvent
+import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.components.CollatzCalculatorEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
