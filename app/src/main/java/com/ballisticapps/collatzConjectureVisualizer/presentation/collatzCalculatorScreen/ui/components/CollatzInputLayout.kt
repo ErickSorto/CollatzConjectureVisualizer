@@ -1,4 +1,4 @@
-package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.components
+package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.ui.components
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.height

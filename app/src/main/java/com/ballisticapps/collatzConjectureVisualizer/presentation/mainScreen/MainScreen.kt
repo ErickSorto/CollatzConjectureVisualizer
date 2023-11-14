@@ -12,7 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import com.ballisticapps.CollatzConjectureVisualizer.R
 import com.ballisticapps.collatzConjectureVisualizer.presentation.NavGraphs
 import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.viewmodel.CollatzViewModel
-import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzCalculatorScreenSetupDestination
+import com.ballisticapps.collatzConjectureVisualizer.presentation.destinations.CollatzCalculatorScreenDestination
+
 import com.ballisticapps.collatzConjectureVisualizer.presentation.mainScreen.components.BottomNavigation
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
@@ -33,7 +34,7 @@ fun MainScreen() {
             navGraph = NavGraphs.root,
             modifier = Modifier.padding(it),
             dependenciesContainerBuilder = {
-                dependency(CollatzCalculatorScreenSetupDestination) {
+                dependency(CollatzCalculatorScreenDestination) {
                     hiltViewModel<CollatzViewModel>()
                 }
             }

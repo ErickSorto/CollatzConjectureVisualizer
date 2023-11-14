@@ -3,11 +3,12 @@ package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalcul
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ballisticapps.collatzConjectureVisualizer.data.CollatzCalculator
-import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.components.CollatzCalculatorEvent
+import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalculatorScreen.ui.components.CollatzCalculatorEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.math.BigInteger
 import javax.inject.Inject
@@ -18,20 +19,22 @@ class CollatzViewModel @Inject constructor(
 ) : ViewModel() {
 
     // StateFlow for enteredNumber and other state
-    private val _collatzViewState = MutableStateFlow(CollatzViewState())
-    val collatzViewState: StateFlow<CollatzViewState> = _collatzViewState.asStateFlow()
-
-    private val _collatzBigIntegerSequence = MutableStateFlow<List<BigInteger>>(emptyList())
-    val collatzBigIntegerSequence: StateFlow<List<BigInteger>> = _collatzBigIntegerSequence.asStateFlow()
+    private val _collatzCalculatorState = MutableStateFlow(CollatzCalculatorState())
+    val collatzCalculatorState: StateFlow<CollatzCalculatorState> =
+        _collatzCalculatorState.asStateFlow()
 
     fun onEvent(event: CollatzCalculatorEvent) = viewModelScope.launch {
         when(event){
             is CollatzCalculatorEvent.CalculateCollatzNumber -> {
-                _collatzBigIntegerSequence.value = emptyList()
-                computeCollatzSequence(collatzViewState.value.enteredNumber.toBigIntegerOrNull() ?: BigInteger.ZERO)
+                _collatzCalculatorState.update { it.copy(collatzBigIntegerSequence = emptyList()) }
+                computeCollatzSequence(
+                    collatzCalculatorState.value.enteredNumber.toBigIntegerOrNull()
+                        ?: BigInteger.ZERO)
             }
             is CollatzCalculatorEvent.EnteredNumber -> {
-                _collatzViewState.value = collatzViewState.value.copy(enteredNumber = event.value)
+                _collatzCalculatorState.value = collatzCalculatorState.value.copy(
+                    enteredNumber = event.value
+                )
             }
         }
     }
@@ -42,12 +45,12 @@ class CollatzViewModel @Inject constructor(
             collatzCalculator.createCollatzList(numEntered).collect { number ->
                 tempList.add(number)
             }
-            _collatzBigIntegerSequence.value = tempList
+            _collatzCalculatorState.update { it.copy(collatzBigIntegerSequence = tempList) }
         }
     }
-
 }
 
-data class CollatzViewState(
-    val enteredNumber: String = ""
+data class CollatzCalculatorState(
+    val enteredNumber: String = "",
+    val collatzBigIntegerSequence: List<BigInteger> = emptyList()
 )

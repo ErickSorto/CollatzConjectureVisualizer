@@ -81,17 +81,19 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.48")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.0")
 
-    implementation ("androidx.fragment:fragment-ktx:1.6.1")
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
     implementation ("androidx.activity:activity-ktx:1.8.0")
 
     implementation ("io.github.raamcosta.compose-destinations:core:1.9.54")
     ksp ("io.github.raamcosta.compose-destinations:ksp:1.9.54")
 
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation("com.patrykandpatrick.vico:compose-m3:1.12.0")
 }

@@ -26,13 +26,6 @@ import com.ramcosta.composedestinations.utils.isRouteOnBackStack
 
 @Composable
 fun BottomNavigation(navController: NavController) {
-    val items = listOf(
-        Screens.CalculatorScreen,
-        Screens.InfoScreen,
-        Screens.UnityVisualizerScreen,
-        Screens.HistoryScreen
-    )
-
     val currentDestination: Destination = navController.appCurrentDestinationAsState().value
         ?: NavGraphs.root.startAppDestination
 
@@ -44,24 +37,20 @@ fun BottomNavigation(navController: NavController) {
     NavigationBar(
         containerColor = colorBottomBar,
     ) {
-        items.forEach { item ->
+        Screens.values().forEach { item ->
             val isCurrentDestOnBackStack = navController.isRouteOnBackStack(item.direction)
             NavigationBarItem(
                 icon = {
-                    item.icon?.let {
-                        Icon(
-                            painter = painterResource(id = it),
-                            "${item.title}"
-                        )
-                    }
+                    Icon(
+                        painter = painterResource(id = item.icon),
+                        item.title
+                    )
                 },
                 label = {
-                    item.title?.let {
-                        Text(
-                            text = it,
-                            fontSize = 9.sp
-                        )
-                    }
+                    Text(
+                        text = item.title,
+                        fontSize = 9.sp
+                    )
                 },
                 alwaysShowLabel = true,
                 selected = currentDestination == item.direction,

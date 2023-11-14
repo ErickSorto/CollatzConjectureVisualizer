@@ -33,7 +33,7 @@ class CollatzCalculator @Inject constructor() {
      * @return A flow emitting each number in the Collatz sequence starting from the provided number.
      */
     fun createCollatzList(numEntered: BigInteger): Flow<BigInteger> =
-        flow { // Use Default dispatcher for CPU-intensive tasks
+        flow {
             var currentNumber = numEntered
             emit(currentNumber)
 
