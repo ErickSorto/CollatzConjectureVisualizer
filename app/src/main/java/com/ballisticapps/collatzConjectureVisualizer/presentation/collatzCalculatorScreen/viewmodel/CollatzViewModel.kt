@@ -45,12 +45,30 @@ class CollatzViewModel @Inject constructor(
             collatzCalculator.createCollatzList(numEntered).collect { number ->
                 tempList.add(number)
             }
-            _collatzCalculatorState.update { it.copy(collatzBigIntegerSequence = tempList) }
+            _collatzCalculatorState.update { state ->
+                state.copy(
+                    collatzBigIntegerSequence = tempList,
+                    collatzTotalSteps = tempList.size,
+                    collatzTotalEven = tempList.count { it.testBit(0) },
+                    collatzTotalOdd = tempList.count { !it.testBit(0) },
+                    collatzEvenPercentage = (tempList.count { it.testBit(0) }.toFloat() / tempList.size.toFloat()) * 100f,
+                    collatzOddPercentage = (tempList.count { !it.testBit(0) }.toFloat() / tempList.size.toFloat()) * 100f,
+                    collatzMaximumIntSteps = tempList.indexOf(tempList.maxOrNull() ?: BigInteger.ZERO),
+                    collatzMaximumInt = tempList.maxOrNull() ?: BigInteger.ZERO,
+                )
+            }
         }
     }
 }
 
 data class CollatzCalculatorState(
     val enteredNumber: String = "",
-    val collatzBigIntegerSequence: List<BigInteger> = emptyList()
+    val collatzBigIntegerSequence: List<BigInteger> = emptyList(),
+    val collatzTotalSteps: Int = 0,
+    val collatzTotalEven: Int = 0,
+    val collatzTotalOdd: Int = 0,
+    val collatzEvenPercentage: Float = 0f,
+    val collatzOddPercentage: Float = 0f,
+    val collatzMaximumIntSteps: Int = 0,
+    val collatzMaximumInt: BigInteger = BigInteger.ZERO
 )

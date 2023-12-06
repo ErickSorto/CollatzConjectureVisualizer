@@ -34,6 +34,7 @@ class CollatzCalculator @Inject constructor() {
      */
     fun createCollatzList(numEntered: BigInteger): Flow<BigInteger> =
         flow {
+
             var currentNumber = numEntered
             emit(currentNumber)
 

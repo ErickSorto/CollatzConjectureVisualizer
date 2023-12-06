@@ -16,7 +16,7 @@ import com.ballisticapps.collatzConjectureVisualizer.presentation.collatzCalcula
 @Composable
 fun CollatzCalculatorScreenContent(
     collatzCalculatorState: CollatzCalculatorState,
-    onCollatzEvent: (CollatzCalculatorEvent) -> Unit
+    onCollatzEvent: (CollatzCalculatorEvent) -> Unit = {}
 ) {
     Column(
         modifier = Modifier

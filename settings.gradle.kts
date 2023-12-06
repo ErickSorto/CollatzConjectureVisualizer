@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CollatzConjectureVisualizer"
 include(":app")
- 
+include(":repository")
