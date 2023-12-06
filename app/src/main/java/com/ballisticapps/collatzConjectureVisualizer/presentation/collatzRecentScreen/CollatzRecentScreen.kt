@@ -1,4 +1,4 @@
-package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzHistoryScreen
+package com.ballisticapps.collatzConjectureVisualizer.presentation.collatzRecentScreen
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,8 +9,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 @CollatzCalculatorNavGraph
 @Destination
 @Composable
-fun CollatzHistoryScreen(
+fun CollatzRecentScreen(
     collatzHistoryViewModel: CollatzViewModel
 ){
-    Text(text = "CollatzHistoryScreen")
+    Text(text = "Recent Screen")
 }

@@ -23,7 +23,9 @@ fun CollatzCalculatorScreenContent(
             .fillMaxSize()
             .padding(vertical = 16.dp)
     ) {
-        CollatzIterationTitle(collatzCalculatorState = collatzCalculatorState)
+        CollatzIterationTitle(
+            collatzCalculatorState = collatzCalculatorState
+        )
         CollatzInputLayout(
             collatzCalculatorEvent = {
                 onCollatzEvent(it)

@@ -48,12 +48,15 @@ class CollatzViewModel @Inject constructor(
             _collatzCalculatorState.update { state ->
                 state.copy(
                     collatzBigIntegerSequence = tempList,
-                    collatzTotalSteps = tempList.size,
+                    collatzTotalSteps = tempList.size - 1,
                     collatzTotalEven = tempList.count { it.testBit(0) },
                     collatzTotalOdd = tempList.count { !it.testBit(0) },
-                    collatzEvenPercentage = (tempList.count { it.testBit(0) }.toFloat() / tempList.size.toFloat()) * 100f,
-                    collatzOddPercentage = (tempList.count { !it.testBit(0) }.toFloat() / tempList.size.toFloat()) * 100f,
-                    collatzMaximumIntSteps = tempList.indexOf(tempList.maxOrNull() ?: BigInteger.ZERO),
+                    collatzEvenPercentage = (tempList.count { it.testBit(0) }.toFloat()
+                            / tempList.size.toFloat()) * 100f,
+                    collatzOddPercentage = (tempList.count { !it.testBit(0) }.toFloat()
+                            / tempList.size.toFloat()) * 100f,
+                    collatzMaximumIntSteps = tempList.indexOf(tempList.maxOrNull() ?:
+                    BigInteger.ZERO),
                     collatzMaximumInt = tempList.maxOrNull() ?: BigInteger.ZERO,
                 )
             }
