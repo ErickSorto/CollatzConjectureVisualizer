@@ -46,8 +46,13 @@ class CollatzViewModel @Inject constructor(
                 tempList.add(number)
             }
             _collatzCalculatorState.update { state ->
+                val updatedRecentBigInteger = state.recentBigInteger.toMutableList().apply {
+                    remove(numEntered)
+                    add(numEntered)
+                }
                 state.copy(
                     collatzBigIntegerSequence = tempList,
+                    recentBigInteger = updatedRecentBigInteger,
                     collatzTotalSteps = tempList.size - 1,
                     collatzTotalEven = tempList.count { it.testBit(0) },
                     collatzTotalOdd = tempList.count { !it.testBit(0) },
@@ -67,6 +72,7 @@ class CollatzViewModel @Inject constructor(
 data class CollatzCalculatorState(
     val enteredNumber: String = "",
     val collatzBigIntegerSequence: List<BigInteger> = emptyList(),
+    val recentBigInteger: List<BigInteger> = emptyList(),
     val collatzTotalSteps: Int = 0,
     val collatzTotalEven: Int = 0,
     val collatzTotalOdd: Int = 0,
